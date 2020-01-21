@@ -74,8 +74,11 @@ export default {
 				this._w = this.width;
 				this._h = this.height;
 				this._l = this.left;
-				this._t = this.top
-			} else this['ch' + type](x, y)
+				this._t = this.top;
+			} else {
+				this['ch' + type](x, y);
+				this.$emit('clientrectUpdated', {w: this.width, h: this.height, l: this.left, t: this.top});
+			}
 		},
 		ch0(x, y) {
 			// left-top
@@ -132,6 +135,8 @@ export default {
 			if (this._drag) {
 				this.x = e.pageX - this._x;
 				this.y = e.pageY - this._y;
+
+				this.$emit('positionUpdated', {x: this.x, y: this.y})
 			}
 		},
 		mu(e) {
