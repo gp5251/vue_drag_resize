@@ -7,6 +7,7 @@
 
 <script>
 import Sticker from './components/Stick'
+import throttle from 'lodash.throttle';
 
 export default {
 	name: 'DragAndResize',
@@ -49,6 +50,9 @@ export default {
 		height(v) {
 			this.$el.style.height = v + 'px';
 		}
+	},
+	created() {
+		this._mm = throttle(this.mm, 100);
 	},
 	mounted() {
 		if (this.$slots.default && this.$slots.default[0].elm.nodeType === 1) {
@@ -118,9 +122,10 @@ export default {
 		md(e) {
 			e.stopPropagation();
 			this._drag = true;
-			this._x = e.pageX;
-			this._y = e.pageY;
-			window.addEventListener('mousemove', this.mm)
+			this._x = e.pageX - this._x;
+			this._y = e.pageY - this._y;
+
+			window.addEventListener('mousemove', this._mm)
 			window.addEventListener('mouseup', this.mu)
 		},
 		mm(e) {
@@ -131,12 +136,10 @@ export default {
 		},
 		mu(e) {
 			this._drag = false;
-			// this.x = e.pageX;
-			// this.y = e.pageY;
 			this._x = this.x;
 			this._y = this.y;
 
-			window.removeEventListener('mousemove', this.mm)
+			window.removeEventListener('mousemove', this._mm)
 			window.removeEventListener('mouseup', this.mu)
 		}
 	},

@@ -19,7 +19,6 @@ export default {
 	},
 	created() {
 		this.mm = throttle(this.mousemove.bind(this), 100) 
-		this.mu = throttle(this.mouseup.bind(this), 100) 
 	},
 	methods: {
 		md(e) {
@@ -29,7 +28,7 @@ export default {
 			this.left = e.pageX;
 			this.top = e.pageY;
 			window.addEventListener('mousemove', this.mm)
-			window.addEventListener('mouseup', this.mu)
+			window.addEventListener('mouseup', this.mouseup)
 		},
 
 		mousemove(e) {
@@ -54,7 +53,7 @@ export default {
 			this.top = e.pageY;
 
 			window.removeEventListener('mousemove', this.mm)
-			window.removeEventListener('mouseup', this.mu)
+			window.removeEventListener('mouseup', this.mouseup)
 		}
 	}
 }
