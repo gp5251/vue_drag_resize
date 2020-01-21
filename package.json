@@ -1,5 +1,5 @@
 {
-  "name": "vue_drag_resize",
+  "name": "vue-drag-and-resize",
   "version": "0.1.0",
 	"main": "dist/DragAndResize.umd.js",
   "scripts": {
