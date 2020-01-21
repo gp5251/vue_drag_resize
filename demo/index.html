@@ -8,13 +8,14 @@
 		<link rel="stylesheet" href="../dist/DragAndResize.css">
   </head>
   <body>
-    <div id="app">
-			<App @positionUpdated="positionUpdated" @clientrectUpdated="clientrectUpdated"><div style="width: 300px;height: 150px;"></div></App>
-		</div>
+    <div id="app"> </div>
 		<script src="../node_modules/vue/dist/vue.js"></script>
-		<script src="../dist/dragAndResize.umd.js"></script>
+		<script src="../dist/DragAndResize.umd.js"></script>
 		<script>
 			new Vue({
+				template: `
+					<App @positionUpdated="positionUpdated" @clientrectUpdated="clientrectUpdated"><div style="width: 300px;height: 150px;"></div></App>
+				`,
 				methods: {
 					positionUpdated({x, y}) {
 						console.log('positionUpdated', x, y);
