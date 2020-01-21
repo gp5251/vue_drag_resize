@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Sticker from './components/Stick'
+import Sticker from './components/Sticker';
 import throttle from 'lodash.throttle';
 
 export default {
