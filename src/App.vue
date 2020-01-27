@@ -13,8 +13,8 @@ export default {
 	name: 'DragAndResize',
 	data() {
 		return {
-			width: this.w,
-			height: this.h,
+			width: 0,
+			height: 0,
 			left: 0,
 			top: 0,
 			x: 0,
@@ -24,11 +24,11 @@ export default {
 	props: {
 		w: {
 			type: Number,
-			default: 100
+			default: 0
 		},
 		h: {
 			type: Number,
-			default: 100
+			default: 0
 		}
 	},
 	watch: {
@@ -55,10 +55,18 @@ export default {
 		this._mm = throttle(this.mm, 100);
 	},
 	mounted() {
-		if (this.$slots.default && this.$slots.default[0].elm.nodeType === 1) {
-			const $el = this.$slots.default[0].elm;
-			this.width = $el.offsetWidth;
-			this.height = $el.offsetHeight;
+		if (this.w && this.h) {
+			this.width = this.w;
+			this.height = this.h;
+		} else {
+			if (this.$slots.default && this.$slots.default[0].elm.nodeType === 1) {
+				const $el = this.$slots.default[0].elm;
+				this.width = $el.offsetWidth;
+				this.height = $el.offsetHeight;
+			} else {
+				this.width = this.w;
+				this.height = this.h;
+			}
 		}
 
 		this._w = this.width;
@@ -154,7 +162,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .dragAndResize {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
