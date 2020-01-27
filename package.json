@@ -1,6 +1,6 @@
 {
   "name": "vue-drag-and-resize",
-  "version": "0.1.0",
+  "version": "0.2.0",
 	"main": "dist/DragAndResize.umd.js",
   "scripts": {
     "serve": "vue-cli-service serve",
